@@ -1,11 +1,8 @@
-"use client"
+import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
-import type React from "react"
-import { motion } from "framer-motion"
-import { useLanguage } from "../context/LanguageContext"
-
-const HeroSection: React.FC = () => {
-    const { t, language } = useLanguage()
+const HeroSection = () => {
+    const { t, language } = useLanguage();
 
     return (
         <div className="relative bg-gradient-to-r from-primary to-secondary min-h-screen flex items-center">
@@ -88,7 +85,7 @@ const HeroSection: React.FC = () => {
                                     className="w-10 h-10 rounded-full border-2 border-white"
                                 />
                             </div>
-                            <div className={`${language === "ar" ? "mr-4" : "ml-4"}`}>
+                            <div className={language === "ar" ? "mr-4" : "ml-4"}>
                                 <div className="text-accent flex">
                                     {[1, 2, 3, 4, 5].map((i) => (
                                         <span key={i}>★</span>
@@ -105,18 +102,23 @@ const HeroSection: React.FC = () => {
                         transition={{ duration: 0.8 }}
                         className="hidden md:block"
                     >
-                        <motion.img
-                            src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
-                            alt="Hrayfi Services"
-                            className="w-full h-auto rounded-lg shadow-2xl"
+                        <motion.div
+                            className="relative rounded-lg overflow-hidden shadow-2xl"
                             initial={{ y: 20 }}
                             animate={{ y: 0 }}
                             transition={{
-                                repeat: Number.POSITIVE_INFINITY,
+                                repeat: Infinity,
                                 repeatType: "reverse",
                                 duration: 2,
                             }}
-                        />
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+                                alt="Hrayfi Services"
+                                className="w-full h-auto rounded-lg shadow-2xl"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>
@@ -131,7 +133,7 @@ const HeroSection: React.FC = () => {
                 </svg>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default HeroSection
+export default HeroSection;

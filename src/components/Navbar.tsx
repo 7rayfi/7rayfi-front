@@ -1,33 +1,30 @@
-"use client"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "../context/LanguageContext";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
-import LanguageSwitcher from "./LanguageSwitcher"
-import { useLanguage } from "../context/LanguageContext"
-
-const Navbar: React.FC = () => {
-    const [isScrolled, setIsScrolled] = useState(false)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const { t, setLanguage } = useLanguage()
+const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { t,  setLanguage } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 50) {
-                setIsScrolled(true)
+                setIsScrolled(true);
             } else {
-                setIsScrolled(false)
+                setIsScrolled(false);
             }
-        }
+        };
 
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const handleLanguageChange = (lang: "fr" | "ar") => {
-        setLanguage(lang)
-    }
+        setLanguage(lang);
+    };
 
     return (
         <motion.nav
@@ -40,32 +37,60 @@ const Navbar: React.FC = () => {
         >
             <div className="container mx-auto px-4 flex justify-between items-center">
                 <Link to="/" className="flex items-center">
-                    <motion.div whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
-                        <img src="https://img.icons8.com/color/48/000000/hammer.png" alt="Hrayfi" className="h-10" />
+                    <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                        <img
+                            src="https://img.icons8.com/color/48/000000/hammer.png"
+                            alt="Hrayfi"
+                            className="h-10"
+                        />
                     </motion.div>
-                    <motion.h1 className="ml-2 text-2xl font-bold text-primary" whileHover={{ scale: 1.05 }}>
+                    <motion.span
+                        className={`ml-2 text-2xl font-bold ${isScrolled ? 'text-primary' : 'text-white'}`}
+                        whileHover={{ scale: 1.05 }}
+                    >
                         Hrayfi
-                    </motion.h1>
+                    </motion.span>
                 </Link>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-6">
-                    <Link to="/" className="text-gray-800 hover:text-primary transition-colors">
+                    <Link
+                        to="/"
+                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors`}
+                    >
                         {t("nav.home")}
                     </Link>
-                    <Link to="/services" className="text-gray-800 hover:text-primary transition-colors">
+                    <Link
+                        to="/services"
+                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors`}
+                    >
                         {t("nav.services")}
                     </Link>
-                    <Link to="/artisans" className="text-gray-800 hover:text-primary transition-colors">
+                    <Link
+                        to="/artisans"
+                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors`}
+                    >
                         {t("nav.artisans")}
                     </Link>
-                    <Link to="/formations" className="text-gray-800 hover:text-primary transition-colors">
+                    <Link
+                        to="/formations"
+                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors`}
+                    >
                         {t("nav.formations")}
                     </Link>
-                    <Link to="/about" className="text-gray-800 hover:text-primary transition-colors">
+                    <Link
+                        to="/about"
+                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors`}
+                    >
                         {t("nav.about")}
                     </Link>
-                    <Link to="/contact" className="text-gray-800 hover:text-primary transition-colors">
+                    <Link
+                        to="/contact"
+                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors`}
+                    >
                         {t("nav.contact")}
                     </Link>
 
@@ -95,7 +120,10 @@ const Navbar: React.FC = () => {
                 <div className="md:hidden flex items-center space-x-4">
                     <LanguageSwitcher onLanguageChange={handleLanguageChange} />
 
-                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-800 focus:outline-none">
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} focus:outline-none`}
+                    >
                         <svg
                             className="w-6 h-6"
                             fill="none"
@@ -167,17 +195,21 @@ const Navbar: React.FC = () => {
                         </Link>
                         <div className="flex space-x-2 pt-2">
                             <Link to="/login" className="flex-1" onClick={() => setIsMenuOpen(false)}>
-                                <button className="w-full bg-primary text-white px-4 py-2 rounded-md">{t("nav.login")}</button>
+                                <button className="w-full bg-primary text-white px-4 py-2 rounded-md">
+                                    {t("nav.login")}
+                                </button>
                             </Link>
                             <Link to="/register" className="flex-1" onClick={() => setIsMenuOpen(false)}>
-                                <button className="w-full bg-secondary text-white px-4 py-2 rounded-md">{t("nav.register")}</button>
+                                <button className="w-full bg-secondary text-white px-4 py-2 rounded-md">
+                                    {t("nav.register")}
+                                </button>
                             </Link>
                         </div>
                     </div>
                 </motion.div>
             )}
         </motion.nav>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

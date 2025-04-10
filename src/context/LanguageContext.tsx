@@ -1,14 +1,11 @@
-"use client"
+import { createContext, useState, useContext, useEffect, ReactNode } from "react";
 
-import type React from "react"
-import { createContext, useState, useContext, useEffect } from "react"
-
-type Language = "fr" | "ar"
+type Language = "fr" | "ar";
 
 interface LanguageContextType {
-    language: Language
-    setLanguage: (lang: Language) => void
-    t: (key: string) => string
+    language: Language;
+    setLanguage: (lang: Language) => void;
+    t: (key: string) => string;
 }
 
 // Définition des traductions
@@ -44,8 +41,8 @@ const translations: Record<Language, Record<string, string>> = {
         "services.filter.apply": "Appliquer",
         "services.filter.reset": "Réinitialiser",
         "services.details": "Voir détails",
-        all: "Tous",
-        years: "ans",
+        "all": "Tous",
+        "years": "ans",
 
         // Artisans
         "artisans.title": "Nos artisans qualifiés",
@@ -94,11 +91,56 @@ const translations: Record<Language, Record<string, string>> = {
         "category.decoration": "Décoration",
         "category.masonry": "Maçonnerie",
 
+        // How it works
+        "howItWorks.title": "Comment ça marche",
+        "howItWorks.subtitle": "Suivez ces étapes simples pour trouver et réserver le service dont vous avez besoin",
+        "howItWorks.step1.title": "Recherchez un service",
+        "howItWorks.step1.description": "Parcourez notre large sélection de services ou utilisez la recherche pour trouver ce dont vous avez besoin.",
+        "howItWorks.step2.title": "Choisissez un prestataire",
+        "howItWorks.step2.description": "Comparez les profils, les évaluations et les portfolios pour choisir le meilleur prestataire.",
+        "howItWorks.step3.title": "Contactez et réservez",
+        "howItWorks.step3.description": "Discutez directement avec le prestataire et réservez le service à la date qui vous convient.",
+        "howItWorks.step4.title": "Profitez du service",
+        "howItWorks.step4.description": "Recevez un service de qualité et laissez votre avis pour aider la communauté.",
+        "howItWorks.button": "Commencer maintenant",
+
+        // Testimonials
+        "testimonials.title": "Ce que disent nos clients",
+        "testimonials.subtitle": "Découvrez les témoignages de nos clients et prestataires satisfaits",
+
+        // Subscription Plans
+        "plans.title": "Choisissez votre forfait",
+        "plans.subtitle": "Des forfaits adaptés à tous les besoins et budgets",
+        "plans.basic.title": "Basic",
+        "plans.basic.description": "Pour commencer à explorer la plateforme",
+        "plans.basic.price": "0",
+        "plans.premium.title": "Premium",
+        "plans.premium.description": "Pour une utilisation régulière",
+        "plans.premium.price": "99",
+        "plans.extra.title": "Extra",
+        "plans.extra.description": "Pour une utilisation professionnelle",
+        "plans.extra.price": "199",
+        "plans.monthly": "DH/mois",
+        "plans.popular": "PLUS POPULAIRE",
+        "plans.button.free": "Commencer gratuitement",
+        "plans.button.subscribe": "S'abonner maintenant",
+
+        // CTA Section
+        "cta.title": "Prêt à trouver le service parfait pour vos besoins ?",
+        "cta.subtitle": "Rejoignez des milliers d'utilisateurs satisfaits et commencez à utiliser Hrayfi dès aujourd'hui.",
+        "cta.button.find": "Trouver un service",
+        "cta.button.become": "Devenir prestataire",
+
         // Footer
         "footer.rights": "Tous droits réservés",
         "footer.terms": "Conditions d'utilisation",
         "footer.privacy": "Politique de confidentialité",
         "footer.faq": "FAQ",
+        "footer.contact": "Contact",
+        "footer.about": "À propos",
+        "footer.services": "Services",
+        "footer.artisans": "Artisans",
+        "footer.formations": "Formations",
     },
     ar: {
         // Navigation
@@ -130,8 +172,8 @@ const translations: Record<Language, Record<string, string>> = {
         "services.filter.apply": "تطبيق",
         "services.filter.reset": "إعادة تعيين",
         "services.details": "عرض التفاصيل",
-        all: "الكل",
-        years: "سنوات",
+        "all": "الكل",
+        "years": "سنوات",
 
         // Artisans
         "artisans.title": "حرفيونا المؤهلون",
@@ -180,46 +222,116 @@ const translations: Record<Language, Record<string, string>> = {
         "category.decoration": "الديكور",
         "category.masonry": "البناء",
 
+        // How it works
+        "howItWorks.title": "كيف يعمل",
+        "howItWorks.subtitle": "اتبع هذه الخطوات البسيطة للعثور على الخدمة التي تحتاجها وحجزها",
+        "howItWorks.step1.title": "ابحث عن خدمة",
+        "howItWorks.step1.description": "تصفح مجموعتنا الواسعة من الخدمات أو استخدم البحث للعثور على ما تحتاجه.",
+        "howItWorks.step2.title": "اختر مقدم خدمة",
+        "howItWorks.step2.description": "قارن بين الملفات الشخصية والتقييمات والسير الذاتية لاختيار أفضل مقدم خدمة.",
+        "howItWorks.step3.title": "اتصل واحجز",
+        "howItWorks.step3.description": "تواصل مباشرة مع مقدم الخدمة واحجز الخدمة في التاريخ الذي يناسبك.",
+        "howItWorks.step4.title": "استمتع بالخدمة",
+        "howItWorks.step4.description": "احصل على خدمة عالية الجودة واترك رأيك لمساعدة المجتمع.",
+        "howItWorks.button": "ابدأ الآن",
+
+        // Testimonials
+        "testimonials.title": "ماذا يقول عملاؤنا",
+        "testimonials.subtitle": "اكتشف آراء عملائنا ومقدمي الخدمات الراضين",
+
+        // Subscription Plans
+        "plans.title": "اختر باقتك",
+        "plans.subtitle": "باقات تناسب جميع الاحتياجات والميزانيات",
+        "plans.basic.title": "أساسية",
+        "plans.basic.description": "للبدء في استكشاف المنصة",
+        "plans.basic.price": "0",
+        "plans.premium.title": "متميزة",
+        "plans.premium.description": "للاستخدام المنتظم",
+        "plans.premium.price": "99",
+        "plans.extra.title": "إضافية",
+        "plans.extra.description": "للاستخدام المهني",
+        "plans.extra.price": "199",
+        "plans.monthly": "درهم/شهر",
+        "plans.popular": "الأكثر شعبية",
+        "plans.button.free": "ابدأ مجانًا",
+        "plans.button.subscribe": "اشترك الآن",
+
+        // CTA Section
+        "cta.title": "هل أنت مستعد للعثور على الخدمة المثالية لاحتياجاتك؟",
+        "cta.subtitle": "انضم إلى آلاف المستخدمين الراضين وابدأ استخدام حرفي اليوم.",
+        "cta.button.find": "ابحث عن خدمة",
+        "cta.button.become": "كن مقدم خدمة",
+
         // Footer
         "footer.rights": "جميع الحقوق محفوظة",
         "footer.terms": "شروط الاستخدام",
         "footer.privacy": "سياسة الخصوصية",
         "footer.faq": "الأسئلة الشائعة",
+        "footer.contact": "اتصل بنا",
+        "footer.about": "من نحن",
+        "footer.services": "الخدمات",
+        "footer.artisans": "الحرفيين",
+        "footer.formations": "التكوينات",
     },
-}
+};
 
 const LanguageContext = createContext<LanguageContextType>({
     language: "fr",
     setLanguage: () => {},
     t: (key: string) => key,
-})
+});
 
-export const useLanguage = () => useContext(LanguageContext)
+export const useLanguage = () => useContext(LanguageContext);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [language, setLanguage] = useState<Language>("fr")
+interface LanguageProviderProps {
+    children: ReactNode;
+}
+
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
+    const [language, setLanguage] = useState<Language>("fr");
 
     useEffect(() => {
-        // Check if there's a stored language preference
-        const storedLanguage = localStorage.getItem("language") as Language | null
+        // Récupérer la langue enregistrée dans localStorage
+        const storedLanguage = localStorage.getItem("language") as Language | null;
         if (storedLanguage && (storedLanguage === "fr" || storedLanguage === "ar")) {
-            setLanguage(storedLanguage)
+            setLanguage(storedLanguage);
         }
 
-        // Apply RTL for Arabic
-        document.documentElement.dir = language === "ar" ? "rtl" : "ltr"
-        document.body.classList.toggle("rtl", language === "ar")
-    }, [language])
+        // Appliquer RTL pour l'arabe
+        document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+        if (language === "ar") {
+            document.body.classList.add("rtl");
+        } else {
+            document.body.classList.remove("rtl");
+        }
+    }, [language]);
+
+    const handleSetLanguage = (lang: Language) => {
+        setLanguage(lang);
+        localStorage.setItem("language", lang);
+
+        // Appliquer RTL pour l'arabe
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+        if (lang === "ar") {
+            document.body.classList.add("rtl");
+        } else {
+            document.body.classList.remove("rtl");
+        }
+    };
 
     const t = (key: string): string => {
         // Vérifier si la clé existe dans les traductions
         if (translations[language] && translations[language][key]) {
-            return translations[language][key]
+            return translations[language][key];
         }
         // Si la clé n'existe pas, retourner la clé elle-même
-        console.warn(`Translation key not found: ${key}`)
-        return key
-    }
+        console.warn(`Translation key not found: ${key}`);
+        return key;
+    };
 
-    return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>
-}
+    return (
+        <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+            {children}
+        </LanguageContext.Provider>
+    );
+};

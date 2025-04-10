@@ -1,33 +1,32 @@
-"use client"
-
-import type React from "react"
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 interface LanguageSwitcherProps {
-    onLanguageChange: (lang: "fr" | "ar") => void
+    onLanguageChange: (lang: "fr" | "ar") => void;
 }
 
-const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ onLanguageChange }) => {
-    const [language, setLanguage] = useState<"fr" | "ar">("fr")
-
-    const toggleLanguage = () => {
-        const newLang = language === "fr" ? "ar" : "fr"
-        setLanguage(newLang)
-        onLanguageChange(newLang)
-
-        // Store the language preference in localStorage
-        localStorage.setItem("language", newLang)
-    }
+const LanguageSwitcher = ({ onLanguageChange }: LanguageSwitcherProps) => {
+    const { language } = useLanguage();
+    const [currentLanguage, setCurrentLanguage] = useState<"fr" | "ar">(language);
 
     useEffect(() => {
-        // Check if there's a stored language preference
-        const storedLanguage = localStorage.getItem("language") as "fr" | "ar" | null
-        if (storedLanguage) {
-            setLanguage(storedLanguage)
-            onLanguageChange(storedLanguage)
-        }
-    }, [onLanguageChange])
+        // Sync with context language
+        setCurrentLanguage(language);
+    }, [language]);
+
+    const toggleLanguage = () => {
+        const newLang = currentLanguage === "fr" ? "ar" : "fr";
+        setCurrentLanguage(newLang);
+        onLanguageChange(newLang);
+
+        // Store the language preference in localStorage
+        localStorage.setItem("language", newLang);
+
+        // Apply RTL for Arabic
+        document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
+        document.body.classList.toggle("rtl", newLang === "ar");
+    };
 
     return (
         <motion.div
@@ -37,11 +36,13 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ onLanguageChange })
             onClick={toggleLanguage}
         >
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white bg-opacity-20 text-white">
-                {language === "fr" ? "FR" : "AR"}
+                {currentLanguage === "fr" ? "FR" : "AR"}
             </div>
-            <span className="ml-2 text-sm hidden md:inline">{language === "fr" ? "العربية" : "Français"}</span>
+            <span className="ml-2 text-sm hidden md:inline">
+        {currentLanguage === "fr" ? "العربية" : "Français"}
+      </span>
         </motion.div>
-    )
-}
+    );
+};
 
-export default LanguageSwitcher
+export default LanguageSwitcher;
