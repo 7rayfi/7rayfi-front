@@ -18,7 +18,7 @@ const testimonials: Testimonial[] = [
         id: 1,
         name: "Fatima Zahra",
         role: "Cliente",
-        avatar: "/testimonials/avatar1.jpg",
+        avatar: "https://randomuser.me/api/portraits/women/32.jpg",
         content:
             "J'ai trouvé un excellent plombier sur Hrayfi qui a résolu mon problème en moins d'une heure. Le service était rapide et professionnel. Je recommande vivement cette plateforme !",
         rating: 5,
@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
         id: 2,
         name: "Mohammed Amine",
         role: "Client",
-        avatar: "/testimonials/avatar2.jpg",
+        avatar: "https://randomuser.me/api/portraits/men/45.jpg",
         content:
             "Grâce à Hrayfi, j'ai pu trouver un électricien qualifié pour refaire toute l'installation électrique de ma maison. Le travail était impeccable et le prix très raisonnable.",
         rating: 4,
@@ -36,7 +36,7 @@ const testimonials: Testimonial[] = [
         id: 3,
         name: "Nadia Benkiran",
         role: "Cliente",
-        avatar: "/testimonials/avatar3.jpg",
+        avatar: "https://randomuser.me/api/portraits/women/68.jpg",
         content:
             "J'utilise Hrayfi depuis plusieurs mois maintenant et je suis toujours satisfaite des services. La plateforme est facile à utiliser et les prestataires sont très professionnels.",
         rating: 5,
@@ -45,7 +45,7 @@ const testimonials: Testimonial[] = [
         id: 4,
         name: "Youssef Tazi",
         role: "Prestataire",
-        avatar: "/testimonials/avatar4.jpg",
+        avatar: "https://randomuser.me/api/portraits/men/22.jpg",
         content:
             "En tant que menuisier, Hrayfi m'a permis de développer ma clientèle et d'augmenter mes revenus. La plateforme est très bien conçue et l'équipe support est toujours disponible.",
         rating: 5,
@@ -64,7 +64,7 @@ const TestimonialsSection: React.FC = () => {
     }
 
     return (
-        <section className="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <section className="py-16 bg-gradient-to-r from-[#d62828] to-[#f77f00] text-white">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
                     <motion.h2
@@ -115,7 +115,7 @@ const TestimonialsSection: React.FC = () => {
                                     </div>
                                     <p className="text-gray-700 italic mb-4">"{testimonials[currentIndex].content}"</p>
                                     <div>
-                                        <h4 className="font-bold text-primary">{testimonials[currentIndex].name}</h4>
+                                        <h4 className="font-bold text-[#d62828]">{testimonials[currentIndex].name}</h4>
                                         <p className="text-gray-600">{testimonials[currentIndex].role}</p>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@ const TestimonialsSection: React.FC = () => {
 
                     <button
                         onClick={prevTestimonial}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 bg-white text-primary rounded-full p-2 shadow-md hover:bg-gray-100"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 bg-white text-[#d62828] rounded-full p-2 shadow-md hover:bg-gray-100"
                         aria-label="Témoignage précédent"
                     >
                         <svg
@@ -141,7 +141,7 @@ const TestimonialsSection: React.FC = () => {
 
                     <button
                         onClick={nextTestimonial}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 bg-white text-primary rounded-full p-2 shadow-md hover:bg-gray-100"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 bg-white text-[#d62828] rounded-full p-2 shadow-md hover:bg-gray-100"
                         aria-label="Témoignage suivant"
                     >
                         <svg

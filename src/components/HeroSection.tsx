@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 const HeroSection: React.FC = () => {
     return (
-        <div className="relative bg-gradient-to-r from-primary to-secondary min-h-screen flex items-center">
+        <div className="relative bg-gradient-to-r from-[#d62828] to-[#f77f00] min-h-screen flex items-center">
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 bg-pattern opacity-10"></div>
             </div>
@@ -43,7 +43,7 @@ const HeroSection: React.FC = () => {
                             transition={{ delay: 0.6, duration: 0.8 }}
                         >
                             <motion.button
-                                className="bg-white text-primary font-semibold px-6 py-3 rounded-md shadow-lg"
+                                className="bg-white text-[#d62828] font-semibold px-6 py-3 rounded-md shadow-lg"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -65,14 +65,27 @@ const HeroSection: React.FC = () => {
                             transition={{ delay: 0.8, duration: 0.8 }}
                         >
                             <div className="flex -space-x-2">
-                                {[1, 2, 3, 4].map((i) => (
-                                    <img
-                                        key={i}
-                                        src={`/avatar-${i}.jpg`}
-                                        alt={`User ${i}`}
-                                        className="w-10 h-10 rounded-full border-2 border-white"
-                                    />
-                                ))}
+                                {/* Utilisation d'images du web au lieu d'images locales */}
+                                <img
+                                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                                    alt="User 1"
+                                    className="w-10 h-10 rounded-full border-2 border-white"
+                                />
+                                <img
+                                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                                    alt="User 2"
+                                    className="w-10 h-10 rounded-full border-2 border-white"
+                                />
+                                <img
+                                    src="https://randomuser.me/api/portraits/men/86.jpg"
+                                    alt="User 3"
+                                    className="w-10 h-10 rounded-full border-2 border-white"
+                                />
+                                <img
+                                    src="https://randomuser.me/api/portraits/women/63.jpg"
+                                    alt="User 4"
+                                    className="w-10 h-10 rounded-full border-2 border-white"
+                                />
                             </div>
                             <div className="ml-4">
                                 <div className="text-yellow-300 flex">
@@ -91,8 +104,9 @@ const HeroSection: React.FC = () => {
                         transition={{ duration: 0.8 }}
                         className="hidden md:block"
                     >
+                        {/* Image d'un artisan marocain depuis le web */}
                         <motion.img
-                            src="/hero-image.png"
+                            src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
                             alt="Hrayfi Services"
                             className="w-full h-auto rounded-lg shadow-2xl"
                             initial={{ y: 20 }}
