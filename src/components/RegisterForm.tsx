@@ -4,6 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 interface RegisterFormProps {
     onSubmit?: (data: {
@@ -16,6 +17,7 @@ interface RegisterFormProps {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
+    const { t, language } = useLanguage()
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
@@ -76,92 +78,90 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
     return (
         <motion.div
-            className="max-w-md w-full mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+            className={`max-w-md w-full mx-auto bg-white rounded-lg shadow-lg overflow-hidden ${language === "ar" ? "rtl" : ""}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
         >
             <div className="bg-gradient-to-r from-primary to-secondary py-6 px-6">
-                <h2 className="text-2xl font-bold text-white text-center">Inscription</h2>
+                <h2 className="text-2xl font-bold text-white text-center">{t("auth.register")}</h2>
             </div>
 
-            <div className="p-6">
+            <div className="p-6 bg-auth">
                 {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className="flex gap-4 mb-4">
                         <div className="w-1/2">
-                            <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">
-                                Prénom
+                            <label htmlFor="firstName" className="form-label">
+                                {t("auth.firstName")}
                             </label>
                             <input
                                 type="text"
                                 id="firstName"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                                placeholder="Prénom"
+                                className="form-input"
+                                placeholder={t("auth.firstName")}
                                 required
                             />
                         </div>
                         <div className="w-1/2">
-                            <label htmlFor="lastName" className="block text-gray-700 font-medium mb-2">
-                                Nom
+                            <label htmlFor="lastName" className="form-label">
+                                {t("auth.lastName")}
                             </label>
                             <input
                                 type="text"
                                 id="lastName"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
-                                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                                placeholder="Nom"
+                                className="form-input"
+                                placeholder={t("auth.lastName")}
                                 required
                             />
                         </div>
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                            Email
+                        <label htmlFor="email" className="form-label">
+                            {t("auth.email")}
                         </label>
                         <input
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="form-input"
                             placeholder="votre@email.com"
                             required
                         />
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
-                            Mot de passe
+                        <label htmlFor="password" className="form-label">
+                            {t("auth.password")}
                         </label>
                         <input
                             type="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="form-input"
                             placeholder="••••••••"
                             required
                         />
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="confirmPassword" className="block text-gray-700 font-medium mb-2">
-                            Confirmer le mot de passe
+                        <label htmlFor="confirmPassword" className="form-label">
+                            {t("auth.confirmPassword")}
                         </label>
                         <input
                             type="password"
                             id="confirmPassword"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                                passwordError ? "border-red-500" : ""
-                            }`}
+                            className={`form-input ${passwordError ? "border-red-500" : ""}`}
                             placeholder="••••••••"
                             required
                         />
@@ -169,7 +169,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                     </div>
 
                     <div className="mb-6">
-                        <label className="block text-gray-700 font-medium mb-2">Type de compte</label>
+                        <label className="form-label">{t("auth.accountType")}</label>
                         <div className="flex gap-4">
                             <div className="flex-1">
                                 <input
@@ -189,7 +189,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                             : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                                     }`}
                                 >
-                                    Client
+                                    {t("auth.client")}
                                 </label>
                             </div>
                             <div className="flex-1">
@@ -210,7 +210,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                             : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                                     }`}
                                 >
-                                    Prestataire (Hrayfi)
+                                    {t("auth.provider")}
                                 </label>
                             </div>
                         </div>
@@ -225,14 +225,17 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                 onChange={(e) => setAgreeTerms(e.target.checked)}
                                 className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded mt-1"
                             />
-                            <label htmlFor="agree-terms" className="ml-2 block text-sm text-gray-700">
-                                J'accepte les{" "}
+                            <label
+                                htmlFor="agree-terms"
+                                className={`${language === "ar" ? "mr-2" : "ml-2"} block text-sm text-gray-700`}
+                            >
+                                {t("auth.terms")}{" "}
                                 <Link to="/terms" className="text-primary hover:underline">
-                                    conditions d'utilisation
+                                    {t("footer.terms")}
                                 </Link>{" "}
-                                et la{" "}
+                                {t("auth.privacy")}{" "}
                                 <Link to="/privacy" className="text-primary hover:underline">
-                                    politique de confidentialité
+                                    {t("footer.privacy")}
                                 </Link>
                             </label>
                         </div>
@@ -240,7 +243,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
                     <motion.button
                         type="submit"
-                        className="w-full bg-primary text-white py-2 px-4 rounded-md font-medium hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                        className="form-button"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         disabled={isLoading}
@@ -248,7 +251,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                         {isLoading ? (
                             <span className="flex items-center justify-center">
                 <svg
-                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                    className={`animate-spin ${language === "ar" ? "-mr-1 ml-2" : "-ml-1 mr-2"} h-4 w-4 text-white`}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -260,10 +263,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Inscription en cours...
+                                {t("auth.loading")}
               </span>
                         ) : (
-                            "S'inscrire"
+                            t("auth.signUp")
                         )}
                     </motion.button>
                 </form>
@@ -274,7 +277,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                             <div className="w-full border-t border-gray-300"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-gray-500">Ou s'inscrire avec</span>
+                            <span className="px-2 bg-light text-gray-500">{t("auth.or")}</span>
                         </div>
                     </div>
 
@@ -310,9 +313,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600">
-                        Vous avez déjà un compte ?{" "}
+                        {t("auth.haveAccount")}{" "}
                         <Link to="/login" className="text-primary font-medium hover:underline">
-                            Se connecter
+                            {t("auth.signIn")}
                         </Link>
                     </p>
                 </div>

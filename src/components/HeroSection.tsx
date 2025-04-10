@@ -2,10 +2,13 @@
 
 import type React from "react"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 const HeroSection: React.FC = () => {
+    const { t, language } = useLanguage()
+
     return (
-        <div className="relative bg-gradient-to-r from-[#d62828] to-[#f77f00] min-h-screen flex items-center">
+        <div className="relative bg-gradient-to-r from-primary to-secondary min-h-screen flex items-center">
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 bg-pattern opacity-10"></div>
             </div>
@@ -24,7 +27,7 @@ const HeroSection: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
                         >
-                            Trouvez les meilleurs artisans au Maroc
+                            {t("hero.title")}
                         </motion.h1>
                         <motion.p
                             className="text-lg md:text-xl mb-8 text-gray-100"
@@ -32,8 +35,7 @@ const HeroSection: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
                         >
-                            Hrayfi connecte les clients avec des prestataires de services qualifiés pour tous vos besoins de
-                            bricolage, projets et conseils.
+                            {t("hero.subtitle")}
                         </motion.p>
 
                         <motion.div
@@ -43,18 +45,18 @@ const HeroSection: React.FC = () => {
                             transition={{ delay: 0.6, duration: 0.8 }}
                         >
                             <motion.button
-                                className="bg-white text-[#d62828] font-semibold px-6 py-3 rounded-md shadow-lg"
+                                className="bg-light text-primary font-semibold px-6 py-3 rounded-md shadow-lg"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Trouver un service
+                                {t("hero.button.find")}
                             </motion.button>
                             <motion.button
-                                className="border-2 border-white text-white font-semibold px-6 py-3 rounded-md"
+                                className="border-2 border-light text-light font-semibold px-6 py-3 rounded-md"
                                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Devenir prestataire
+                                {t("hero.button.become")}
                             </motion.button>
                         </motion.div>
 
@@ -65,7 +67,6 @@ const HeroSection: React.FC = () => {
                             transition={{ delay: 0.8, duration: 0.8 }}
                         >
                             <div className="flex -space-x-2">
-                                {/* Utilisation d'images du web au lieu d'images locales */}
                                 <img
                                     src="https://randomuser.me/api/portraits/men/32.jpg"
                                     alt="User 1"
@@ -87,13 +88,13 @@ const HeroSection: React.FC = () => {
                                     className="w-10 h-10 rounded-full border-2 border-white"
                                 />
                             </div>
-                            <div className="ml-4">
-                                <div className="text-yellow-300 flex">
+                            <div className={`${language === "ar" ? "mr-4" : "ml-4"}`}>
+                                <div className="text-accent flex">
                                     {[1, 2, 3, 4, 5].map((i) => (
                                         <span key={i}>★</span>
                                     ))}
                                 </div>
-                                <p className="text-white text-sm">Plus de 2000 prestataires de confiance</p>
+                                <p className="text-white text-sm">{t("hero.providers")}</p>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -104,7 +105,6 @@ const HeroSection: React.FC = () => {
                         transition={{ duration: 0.8 }}
                         className="hidden md:block"
                     >
-                        {/* Image d'un artisan marocain depuis le web */}
                         <motion.img
                             src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
                             alt="Hrayfi Services"
@@ -124,7 +124,7 @@ const HeroSection: React.FC = () => {
             <div className="absolute bottom-0 left-0 right-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
                     <path
-                        fill="#ffffff"
+                        fill="#EEE6D8"
                         fillOpacity="1"
                         d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
                     ></path>

@@ -4,12 +4,14 @@ import type React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 interface LoginFormProps {
     onSubmit?: (data: { email: string; password: string }) => void
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+    const { t, language } = useLanguage()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
@@ -42,44 +44,44 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 
     return (
         <motion.div
-            className="max-w-md w-full mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
+            className={`max-w-md w-full mx-auto bg-white rounded-lg shadow-lg overflow-hidden ${language === "ar" ? "rtl" : ""}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
         >
             <div className="bg-gradient-to-r from-primary to-secondary py-6 px-6">
-                <h2 className="text-2xl font-bold text-white text-center">Connexion</h2>
+                <h2 className="text-2xl font-bold text-white text-center">{t("auth.login")}</h2>
             </div>
 
-            <div className="p-6">
+            <div className="p-6 bg-auth">
                 {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                            Email
+                        <label htmlFor="email" className="form-label">
+                            {t("auth.email")}
                         </label>
                         <input
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="form-input"
                             placeholder="votre@email.com"
                             required
                         />
                     </div>
 
                     <div className="mb-6">
-                        <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
-                            Mot de passe
+                        <label htmlFor="password" className="form-label">
+                            {t("auth.password")}
                         </label>
                         <input
                             type="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="form-input"
                             placeholder="••••••••"
                             required
                         />
@@ -94,20 +96,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                                 onChange={(e) => setRememberMe(e.target.checked)}
                                 className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
                             />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                                Se souvenir de moi
+                            <label
+                                htmlFor="remember-me"
+                                className={`${language === "ar" ? "mr-2" : "ml-2"} block text-sm text-gray-700`}
+                            >
+                                {t("auth.rememberMe")}
                             </label>
                         </div>
                         <div className="text-sm">
                             <Link to="/forgot-password" className="text-primary hover:underline">
-                                Mot de passe oublié ?
+                                {t("auth.forgotPassword")}
                             </Link>
                         </div>
                     </div>
 
                     <motion.button
                         type="submit"
-                        className="w-full bg-primary text-white py-2 px-4 rounded-md font-medium hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                        className="form-button"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         disabled={isLoading}
@@ -115,7 +120,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                         {isLoading ? (
                             <span className="flex items-center justify-center">
                 <svg
-                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                    className={`animate-spin ${language === "ar" ? "-mr-1 ml-2" : "-ml-1 mr-2"} h-4 w-4 text-white`}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -127,10 +132,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Connexion en cours...
+                                {t("auth.loading")}
               </span>
                         ) : (
-                            "Se connecter"
+                            t("auth.signIn")
                         )}
                     </motion.button>
                 </form>
@@ -141,7 +146,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                             <div className="w-full border-t border-gray-300"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-gray-500">Ou continuer avec</span>
+                            <span className="px-2 bg-light text-gray-500">{t("auth.or")}</span>
                         </div>
                     </div>
 
@@ -177,9 +182,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600">
-                        Vous n'avez pas de compte ?{" "}
+                        {t("auth.noAccount")}{" "}
                         <Link to="/register" className="text-primary font-medium hover:underline">
-                            S'inscrire
+                            {t("auth.signUp")}
                         </Link>
                     </p>
                 </div>
