@@ -64,7 +64,7 @@ const TestimonialsSection: React.FC = () => {
     }
 
     return (
-        <section className="py-16 bg-gradient-to-r from-[#d62828] to-[#f77f00] text-white">
+        <section className="py-16 bg-gradient-to-r from-[#93441A] to-[#DAAB3A] text-white">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
                     <motion.h2
