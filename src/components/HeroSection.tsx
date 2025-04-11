@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 const HeroSection: React.FC = () => {
     return (
-        <div className="relative bg-gradient-to-r from-[#d62828] to-[#f77f00] min-h-screen flex items-center">
+        <div className="relative bg-gradient-to-r from-[#4a2511] to-[#DAAB3A] min-h-screen flex items-center">
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 bg-pattern opacity-10"></div>
             </div>
