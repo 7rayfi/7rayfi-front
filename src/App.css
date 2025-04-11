@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
+
 :root {
-  --primary: #d62828; /* Rouge marocain */
-  --secondary: #f77f00; /* Orange marocain */
-  --accent: #fcbf49; /* Jaune marocain */
-  --dark: #003049; /* Bleu foncé marocain */
-  --light: #eae2b7; /* Beige marocain */
+  --primary: #93441a; /* Marron foncé/rouille */
+  --secondary: #b67332; /* Marron/orange */
+  --accent: #daab3a; /* Jaune doré */
+  --light: #eee6d8; /* Beige clair */
+  --dark: #4a2511; /* Version plus foncée du marron pour le contraste */
 }
 
 body {
