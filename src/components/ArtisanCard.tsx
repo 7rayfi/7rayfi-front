@@ -1,8 +1,7 @@
-"use client"
-
 import type React from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 interface ArtisanCardProps {
     id: number
@@ -27,6 +26,24 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                                                      services,
                                                      completedJobs,
                                                  }) => {
+    const { t } = useLanguage();
+
+    // Convertir la spécialité en clé de traduction
+    const getSpecialtyKey = (specialty: string): string => {
+        const specialtyMap: { [key: string]: string } = {
+            "Plomberie": "category.plumbing",
+            "Électricité": "category.electrical",
+            "Peinture": "category.painting",
+            "Menuiserie": "category.carpentry",
+            "Nettoyage": "category.cleaning",
+            "Jardinage": "category.gardening",
+            "Décoration": "category.decoration",
+            "Bricolage": "category.handyman"
+        };
+
+        return specialtyMap[specialty] || specialty;
+    };
+
     return (
         <motion.div
             className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow"
@@ -44,7 +61,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                     />
                     <div className="flex-1 text-center sm:text-left">
                         <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
-                        <p className="text-primary font-medium">{specialty}</p>
+                        <p className="text-primary font-medium">{t(getSpecialtyKey(specialty)) || specialty}</p>
                         <div className="flex items-center justify-center sm:justify-start mt-2">
                             <span className="text-accent mr-1">★</span>
                             <span className="text-sm text-gray-700">{rating.toFixed(1)}</span>
@@ -53,15 +70,15 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                         </div>
                         <div className="mt-3 grid grid-cols-3 gap-2 text-center">
                             <div className="bg-light rounded-md p-2">
-                                <p className="text-xs text-gray-600">Expérience</p>
-                                <p className="font-semibold text-primary">{experience} ans</p>
+                                <p className="text-xs text-gray-600">{t("artisans.experience")}</p>
+                                <p className="font-semibold text-primary">{experience} {t("years")}</p>
                             </div>
                             <div className="bg-light rounded-md p-2">
-                                <p className="text-xs text-gray-600">Services</p>
+                                <p className="text-xs text-gray-600">{t("artisans.services")}</p>
                                 <p className="font-semibold text-primary">{services}</p>
                             </div>
                             <div className="bg-light rounded-md p-2">
-                                <p className="text-xs text-gray-600">Réalisés</p>
+                                <p className="text-xs text-gray-600">{t("artisans.completed")}</p>
                                 <p className="font-semibold text-primary">{completedJobs}</p>
                             </div>
                         </div>
@@ -74,7 +91,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                         >
-                            Voir profil
+                            {t("artisans.profile")}
                         </motion.button>
                     </Link>
                     <Link to={`/contact/${id}`} className="flex-1">
@@ -83,7 +100,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                         >
-                            Contacter
+                            {t("artisans.contact")}
                         </motion.button>
                     </Link>
                 </div>

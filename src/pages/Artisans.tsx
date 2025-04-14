@@ -1,10 +1,9 @@
-"use client"
-
 import type React from "react"
 import { useState, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import ArtisanCard from "../components/ArtisanCard"
+import { useLanguage } from "../context/LanguageContext"
 
 // Sample data for artisans
 const artisansData = [
@@ -12,6 +11,7 @@ const artisansData = [
         id: 101,
         name: "Ahmed Mansouri",
         specialty: "Plomberie",
+        specialtyKey: "category.plumbing",
         location: "Casablanca",
         experience: 8,
         rating: 4.8,
@@ -24,6 +24,7 @@ const artisansData = [
         id: 102,
         name: "Karim Benali",
         specialty: "Électricité",
+        specialtyKey: "category.electrical",
         location: "Rabat",
         experience: 10,
         rating: 4.7,
@@ -36,6 +37,7 @@ const artisansData = [
         id: 103,
         name: "Yasmine Lahlou",
         specialty: "Peinture",
+        specialtyKey: "category.painting",
         location: "Marrakech",
         experience: 5,
         rating: 4.9,
@@ -48,6 +50,7 @@ const artisansData = [
         id: 104,
         name: "Omar Haddad",
         specialty: "Menuiserie",
+        specialtyKey: "category.carpentry",
         location: "Fès",
         experience: 12,
         rating: 4.6,
@@ -60,6 +63,7 @@ const artisansData = [
         id: 105,
         name: "Fatima Zahra",
         specialty: "Nettoyage",
+        specialtyKey: "category.cleaning",
         location: "Tanger",
         experience: 4,
         rating: 4.9,
@@ -72,6 +76,7 @@ const artisansData = [
         id: 106,
         name: "Youssef Tazi",
         specialty: "Jardinage",
+        specialtyKey: "category.gardening",
         location: "Agadir",
         experience: 7,
         rating: 4.7,
@@ -82,11 +87,8 @@ const artisansData = [
     },
 ]
 
-// Get unique specialties and locations
-const specialties = [...new Set(artisansData.map((artisan) => artisan.specialty))]
-const locations = [...new Set(artisansData.map((artisan) => artisan.location))]
-
 const Artisans: React.FC = () => {
+    const { t, language } = useLanguage();
     const [artisans, setArtisans] = useState(artisansData)
     const [filters, setFilters] = useState({
         specialty: "",
@@ -97,6 +99,10 @@ const Artisans: React.FC = () => {
     })
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [isRTL, setIsRTL] = useState(false)
+
+    // Get unique specialties and locations
+    const specialties = [...new Set(artisansData.map((artisan) => artisan.specialty))]
+    const locations = [...new Set(artisansData.map((artisan) => artisan.location))]
 
     useEffect(() => {
         // Check if RTL is enabled
@@ -138,7 +144,7 @@ const Artisans: React.FC = () => {
         }
 
         setArtisans(filteredArtisans)
-    }, [filters])
+    }, [filters, language])
 
     const handleSpecialtyChange = (specialty: string) => {
         setFilters((prev) => ({ ...prev, specialty }))
@@ -170,26 +176,42 @@ const Artisans: React.FC = () => {
         })
     }
 
+    // Fonction pour obtenir la traduction d'une spécialité
+    const getSpecialtyTranslation = (specialty: string) => {
+        const specialtyKeyMap: { [key: string]: string } = {
+            "Plomberie": "category.plumbing",
+            "Électricité": "category.electrical",
+            "Peinture": "category.painting",
+            "Menuiserie": "category.carpentry",
+            "Nettoyage": "category.cleaning",
+            "Jardinage": "category.gardening",
+            "Décoration": "category.decoration",
+            "Bricolage": "category.handyman"
+        };
+
+        return t(specialtyKeyMap[specialty] || specialty);
+    };
+
     return (
         <div className={isRTL ? "rtl" : ""}>
             <Navbar />
             <main className="pt-24 bg-light">
                 <div className="container mx-auto px-4">
                     <div className="mb-8">
-                        <h1 className="text-3xl font-bold text-gray-800 mb-2">Nos artisans qualifiés</h1>
-                        <p className="text-gray-600">Découvrez nos prestataires de services professionnels</p>
+                        <h1 className="text-3xl font-bold text-gray-800 mb-2">{t("artisans.title")}</h1>
+                        <p className="text-gray-600">{t("artisans.subtitle")}</p>
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-6">
                         {/* Filters - Desktop */}
                         <div className="hidden md:block w-64 bg-white rounded-lg shadow-md p-4 h-fit">
-                            <h2 className="text-lg font-semibold mb-4 text-primary">Filtrer les artisans</h2>
+                            <h2 className="text-lg font-semibold mb-4 text-primary">{t("artisans.filter.title")}</h2>
 
                             {/* Search */}
                             <div className="mb-4">
                                 <input
                                     type="text"
-                                    placeholder="Rechercher..."
+                                    placeholder={t("artisans.search")}
                                     className="w-full px-3 py-2 border rounded-md"
                                     value={filters.searchTerm}
                                     onChange={handleSearchChange}
@@ -198,16 +220,16 @@ const Artisans: React.FC = () => {
 
                             {/* Specialty Filter */}
                             <div className="mb-4">
-                                <h3 className="font-medium mb-2">Spécialité</h3>
+                                <h3 className="font-medium mb-2">{t("artisans.filter.specialty")}</h3>
                                 <select
                                     className="w-full px-3 py-2 border rounded-md"
                                     value={filters.specialty}
                                     onChange={(e) => handleSpecialtyChange(e.target.value)}
                                 >
-                                    <option value="">Toutes</option>
+                                    <option value="">{t("all")}</option>
                                     {specialties.map((specialty) => (
                                         <option key={specialty} value={specialty}>
-                                            {specialty}
+                                            {getSpecialtyTranslation(specialty)}
                                         </option>
                                     ))}
                                 </select>
@@ -215,13 +237,13 @@ const Artisans: React.FC = () => {
 
                             {/* Location Filter */}
                             <div className="mb-4">
-                                <h3 className="font-medium mb-2">Emplacement</h3>
+                                <h3 className="font-medium mb-2">{t("artisans.filter.location")}</h3>
                                 <select
                                     className="w-full px-3 py-2 border rounded-md"
                                     value={filters.location}
                                     onChange={(e) => handleLocationChange(e.target.value)}
                                 >
-                                    <option value="">Tous</option>
+                                    <option value="">{t("all")}</option>
                                     {locations.map((location) => (
                                         <option key={location} value={location}>
                                             {location}
@@ -232,23 +254,23 @@ const Artisans: React.FC = () => {
 
                             {/* Experience Filter */}
                             <div className="mb-4">
-                                <h3 className="font-medium mb-2">Expérience</h3>
+                                <h3 className="font-medium mb-2">{t("artisans.filter.experience")}</h3>
                                 <select
                                     className="w-full px-3 py-2 border rounded-md"
                                     value={filters.experience}
                                     onChange={(e) => handleExperienceChange(Number(e.target.value))}
                                 >
-                                    <option value="0">Tous</option>
-                                    <option value="1">1+ ans</option>
-                                    <option value="3">3+ ans</option>
-                                    <option value="5">5+ ans</option>
-                                    <option value="10">10+ ans</option>
+                                    <option value="0">{t("all")}</option>
+                                    <option value="1">1+ {t("years")}</option>
+                                    <option value="3">3+ {t("years")}</option>
+                                    <option value="5">5+ {t("years")}</option>
+                                    <option value="10">10+ {t("years")}</option>
                                 </select>
                             </div>
 
                             {/* Rating Filter */}
                             <div className="mb-4">
-                                <h3 className="font-medium mb-2">Évaluation</h3>
+                                <h3 className="font-medium mb-2">{t("artisans.filter.rating")}</h3>
                                 <div className="flex items-center gap-1">
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <button
@@ -261,7 +283,7 @@ const Artisans: React.FC = () => {
                                     ))}
                                     {filters.rating > 0 && (
                                         <button className="ml-2 text-xs text-gray-500" onClick={() => handleRatingChange(0)}>
-                                            (Réinitialiser)
+                                            ({t("artisans.filter.reset")})
                                         </button>
                                     )}
                                 </div>
@@ -272,7 +294,7 @@ const Artisans: React.FC = () => {
                                 className="w-full bg-secondary text-white py-2 rounded-md hover:bg-opacity-90"
                                 onClick={resetFilters}
                             >
-                                Réinitialiser
+                                {t("artisans.filter.reset")}
                             </button>
                         </div>
 
@@ -282,7 +304,7 @@ const Artisans: React.FC = () => {
                                 className="w-full bg-white shadow-md py-2 px-4 rounded-md flex justify-between items-center"
                                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                             >
-                                <span className="font-medium">Filtrer les artisans</span>
+                                <span className="font-medium">{t("artisans.filter.title")}</span>
                                 <svg
                                     className={`w-5 h-5 transition-transform ${isFilterOpen ? "transform rotate-180" : ""}`}
                                     fill="none"
@@ -300,7 +322,7 @@ const Artisans: React.FC = () => {
                                     <div className="mb-4">
                                         <input
                                             type="text"
-                                            placeholder="Rechercher..."
+                                            placeholder={t("artisans.search")}
                                             className="w-full px-3 py-2 border rounded-md"
                                             value={filters.searchTerm}
                                             onChange={handleSearchChange}
@@ -309,16 +331,16 @@ const Artisans: React.FC = () => {
 
                                     {/* Specialty Filter */}
                                     <div className="mb-4">
-                                        <h3 className="font-medium mb-2">Spécialité</h3>
+                                        <h3 className="font-medium mb-2">{t("artisans.filter.specialty")}</h3>
                                         <select
                                             className="w-full px-3 py-2 border rounded-md"
                                             value={filters.specialty}
                                             onChange={(e) => handleSpecialtyChange(e.target.value)}
                                         >
-                                            <option value="">Toutes</option>
+                                            <option value="">{t("all")}</option>
                                             {specialties.map((specialty) => (
                                                 <option key={specialty} value={specialty}>
-                                                    {specialty}
+                                                    {getSpecialtyTranslation(specialty)}
                                                 </option>
                                             ))}
                                         </select>
@@ -326,13 +348,13 @@ const Artisans: React.FC = () => {
 
                                     {/* Location Filter */}
                                     <div className="mb-4">
-                                        <h3 className="font-medium mb-2">Emplacement</h3>
+                                        <h3 className="font-medium mb-2">{t("artisans.filter.location")}</h3>
                                         <select
                                             className="w-full px-3 py-2 border rounded-md"
                                             value={filters.location}
                                             onChange={(e) => handleLocationChange(e.target.value)}
                                         >
-                                            <option value="">Tous</option>
+                                            <option value="">{t("all")}</option>
                                             {locations.map((location) => (
                                                 <option key={location} value={location}>
                                                     {location}
@@ -346,7 +368,7 @@ const Artisans: React.FC = () => {
                                         className="w-full bg-secondary text-white py-2 rounded-md hover:bg-opacity-90"
                                         onClick={resetFilters}
                                     >
-                                        Réinitialiser
+                                        {t("artisans.filter.reset")}
                                     </button>
                                 </div>
                             )}
@@ -356,9 +378,9 @@ const Artisans: React.FC = () => {
                         <div className="flex-1">
                             {artisans.length === 0 ? (
                                 <div className="bg-white rounded-lg shadow-md p-8 text-center">
-                                    <p className="text-lg text-gray-600">Aucun artisan ne correspond à vos critères.</p>
+                                    <p className="text-lg text-gray-600">{t("artisans.no.results")}</p>
                                     <button className="mt-4 bg-primary text-white px-4 py-2 rounded-md" onClick={resetFilters}>
-                                        Réinitialiser
+                                        {t("artisans.filter.reset")}
                                     </button>
                                 </div>
                             ) : (

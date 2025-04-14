@@ -1,8 +1,7 @@
-"use client"
-
 import type React from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 interface ServiceCardProps {
     id: number
@@ -27,6 +26,8 @@ const defaultServiceImages = [
 ]
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, price, image, category, provider }) => {
+    const { t } = useLanguage();
+
     // Utiliser l'image fournie ou une image par défaut basée sur l'ID
     const imageUrl = image || defaultServiceImages[id % defaultServiceImages.length]
 
@@ -41,7 +42,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, price
             <div className="relative">
                 <img src={imageUrl || "/placeholder.svg"} alt={title} className="w-full h-48 object-cover" />
                 <div className="absolute top-2 right-2 bg-[#d62828] text-white text-xs font-bold px-2 py-1 rounded">
-                    {category}
+                    {t(`${category}`)}
                 </div>
             </div>
             <div className="p-4">
@@ -61,7 +62,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, price
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Voir détails
+                            {t("services.details")}
                         </motion.button>
                     </Link>
                 </div>

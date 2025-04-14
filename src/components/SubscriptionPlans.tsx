@@ -1,63 +1,64 @@
-"use client"
-
 import type React from "react"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 interface Plan {
     id: string
-    name: string
-    price: number
-    description: string
-    features: string[]
+    nameKey: string
+    priceKey: string
+    descriptionKey: string
+    featuresKeys: string[]
     popular: boolean
 }
 
-const plans: Plan[] = [
-    {
-        id: "basic",
-        name: "Basic",
-        price: 0,
-        description: "Pour commencer à explorer la plateforme",
-        features: [
-            "Accès limité aux fonctionnalités",
-            "Jusqu'à 5 demandes de services par mois",
-            "Accès aux formations gratuites",
-            "Support par email",
-        ],
-        popular: false,
-    },
-    {
-        id: "premium",
-        name: "Premium",
-        price: 99,
-        description: "Pour une utilisation régulière",
-        features: [
-            "Accès à toutes les fonctionnalités",
-            "Jusqu'à 20 demandes de services par mois",
-            "Accès aux formations premium",
-            "Meilleure visibilité pour les prestataires",
-            "Support prioritaire",
-        ],
-        popular: true,
-    },
-    {
-        id: "extra",
-        name: "Extra",
-        price: 199,
-        description: "Pour une utilisation professionnelle",
-        features: [
-            "Accès illimité à toutes les fonctionnalités",
-            "Demandes de services illimitées",
-            "Accès à toutes les formations",
-            "Visibilité maximale pour les prestataires",
-            "Support dédié 24/7",
-            "Fonctionnalités exclusives",
-        ],
-        popular: false,
-    },
-]
-
 const SubscriptionPlans: React.FC = () => {
+    const { t } = useLanguage();
+
+    const plans: Plan[] = [
+        {
+            id: "basic",
+            nameKey: "plans.basic.title",
+            priceKey: "plans.basic.price",
+            descriptionKey: "plans.basic.description",
+            featuresKeys: [
+                "plans.basic.feature1",
+                "plans.basic.feature2",
+                "plans.basic.feature3",
+                "plans.basic.feature4",
+            ],
+            popular: false,
+        },
+        {
+            id: "premium",
+            nameKey: "plans.premium.title",
+            priceKey: "plans.premium.price",
+            descriptionKey: "plans.premium.description",
+            featuresKeys: [
+                "plans.premium.feature1",
+                "plans.premium.feature2",
+                "plans.premium.feature3",
+                "plans.premium.feature4",
+                "plans.premium.feature5",
+            ],
+            popular: true,
+        },
+        {
+            id: "extra",
+            nameKey: "plans.extra.title",
+            priceKey: "plans.extra.price",
+            descriptionKey: "plans.extra.description",
+            featuresKeys: [
+                "plans.extra.feature1",
+                "plans.extra.feature2",
+                "plans.extra.feature3",
+                "plans.extra.feature4",
+                "plans.extra.feature5",
+                "plans.extra.feature6",
+            ],
+            popular: false,
+        },
+    ];
+
     return (
         <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-4">
@@ -69,7 +70,7 @@ const SubscriptionPlans: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        Choisissez votre forfait
+                        {t("plans.title")}
                     </motion.h2>
                     <motion.p
                         className="text-gray-600 max-w-2xl mx-auto"
@@ -78,7 +79,7 @@ const SubscriptionPlans: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        Des forfaits adaptés à tous les besoins et budgets
+                        {t("plans.subtitle")}
                     </motion.p>
                 </div>
 
@@ -94,17 +95,19 @@ const SubscriptionPlans: React.FC = () => {
                             whileHover={{ y: -10 }}
                         >
                             {plan.popular && (
-                                <div className="bg-primary text-white text-center py-2 text-sm font-semibold">PLUS POPULAIRE</div>
+                                <div className="bg-primary text-white text-center py-2 text-sm font-semibold">
+                                    {t("plans.popular")}
+                                </div>
                             )}
                             <div className="p-6">
-                                <h3 className="text-2xl font-bold text-gray-800 mb-2">{plan.name}</h3>
-                                <p className="text-gray-600 mb-4">{plan.description}</p>
+                                <h3 className="text-2xl font-bold text-gray-800 mb-2">{t(plan.nameKey)}</h3>
+                                <p className="text-gray-600 mb-4">{t(plan.descriptionKey)}</p>
                                 <div className="mb-6">
-                                    <span className="text-4xl font-bold text-primary">{plan.price}</span>
-                                    <span className="text-gray-600"> DH/mois</span>
+                                    <span className="text-4xl font-bold text-primary">{t(plan.priceKey)}</span>
+                                    <span className="text-gray-600"> {t("plans.monthly")}</span>
                                 </div>
                                 <ul className="space-y-3 mb-6">
-                                    {plan.features.map((feature, index) => (
+                                    {plan.featuresKeys.map((featureKey, index) => (
                                         <li key={index} className="flex items-start">
                                             <svg
                                                 className="w-5 h-5 text-green-500 mr-2 mt-0.5"
@@ -115,7 +118,7 @@ const SubscriptionPlans: React.FC = () => {
                                             >
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                             </svg>
-                                            <span className="text-gray-600">{feature}</span>
+                                            <span className="text-gray-600">{t(featureKey)}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -126,7 +129,7 @@ const SubscriptionPlans: React.FC = () => {
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.98 }}
                                 >
-                                    {plan.price === 0 ? "Commencer gratuitement" : "S'abonner maintenant"}
+                                    {plan.id === "basic" ? t("plans.button.free") : t("plans.button.subscribe")}
                                 </motion.button>
                             </div>
                         </motion.div>

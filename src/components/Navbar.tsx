@@ -59,37 +59,37 @@ const Navbar = () => {
                 <div className="hidden md:flex items-center space-x-6">
                     <Link
                         to="/"
-                        className={`${isScrolled ? 'text-gray-800' : 'text-secondary'} hover:text-primary transition-colors`}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-black'} hover:text-primary transition-colors`}
                     >
                         {t("nav.home")}
                     </Link>
                     <Link
                         to="/services"
-                        className={`${isScrolled ? 'text-gray-800' : 'text-secondary'} hover:text-primary transition-colors`}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-black'} hover:text-primary transition-colors`}
                     >
                         {t("nav.services")}
                     </Link>
                     <Link
                         to="/artisans"
-                        className={`${isScrolled ? 'text-gray-800' : 'text-secondary'} hover:text-primary transition-colors`}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-black'} hover:text-primary transition-colors`}
                     >
                         {t("nav.artisans")}
                     </Link>
                     <Link
                         to="/formations"
-                        className={`${isScrolled ? 'text-gray-800' : 'text-secondary'} hover:text-primary transition-colors`}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-black'} hover:text-primary transition-colors`}
                     >
                         {t("nav.formations")}
                     </Link>
                     <Link
                         to="/about"
-                        className={`${isScrolled ? 'text-gray-800' : 'text-secondary'} hover:text-primary transition-colors`}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-black'} hover:text-primary transition-colors`}
                     >
                         {t("nav.about")}
                     </Link>
                     <Link
                         to="/contact"
-                        className={`${isScrolled ? 'text-gray-800' : 'text-secondary'} hover:text-primary transition-colors`}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-black'} hover:text-primary transition-colors`}
                     >
                         {t("nav.contact")}
                     </Link>

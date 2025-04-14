@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 const Footer: React.FC = () => {
+    const { t } = useLanguage();
+
     return (
-        <footer className="bg-gray-900 text-white pt-12  pb-8 ">
+        <footer className="bg-gray-900 text-white pt-12 pb-8">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
@@ -16,7 +19,7 @@ const Footer: React.FC = () => {
                             <h2 className="ml-2 text-2xl font-bold text-primary">Hrayfi</h2>
                         </motion.div>
                         <p className="text-gray-400 mb-4">
-                            Connectez-vous avec les meilleurs artisans et prestataires de services au Maroc.
+                            {t("footer.description")}
                         </p>
                         <div className="flex space-x-4">
                             <motion.a
@@ -50,78 +53,78 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-primary">Services</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-primary">{t("footer.services")}</h3>
                         <ul className="space-y-2">
                             <li>
                                 <Link to="/services/bricolage" className="text-gray-400 hover:text-primary transition-colors">
-                                    Bricolage
+                                    {t("category.handyman")}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/services/projets" className="text-gray-400 hover:text-primary transition-colors">
-                                    Projets
+                                    {t("services.projects")}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/services/conseil" className="text-gray-400 hover:text-primary transition-colors">
-                                    Conseil
+                                    {t("services.consultation")}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/services/all" className="text-gray-400 hover:text-primary transition-colors">
-                                    Tous les services
+                                    {t("services.all")}
                                 </Link>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-primary">Formations</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-primary">{t("footer.formations")}</h3>
                         <ul className="space-y-2">
                             <li>
                                 <Link to="/formations/basic" className="text-gray-400 hover:text-primary transition-colors">
-                                    Basic
+                                    {t("plans.basic.title")}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/formations/premium" className="text-gray-400 hover:text-primary transition-colors">
-                                    Premium
+                                    {t("plans.premium.title")}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/formations/extra" className="text-gray-400 hover:text-primary transition-colors">
-                                    Extra
+                                    {t("plans.extra.title")}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/formations/all" className="text-gray-400 hover:text-primary transition-colors">
-                                    Toutes les formations
+                                    {t("footer.all.formations")}
                                 </Link>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-primary">Contact</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-primary">{t("footer.contact")}</h3>
                         <ul className="space-y-2">
                             <li className="flex items-start">
                                 <svg className="w-5 h-5 text-primary mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                                <span className="text-gray-400">123 Rue Mohammed V, Casablanca, Maroc</span>
+                                <span className="text-gray-400">{t("footer.address")}</span>
                             </li>
                             <li className="flex items-start">
                                 <svg className="w-5 h-5 text-primary mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
-                                <span className="text-gray-400">contact@hrayfi.ma</span>
+                                <span className="text-gray-400">{t("footer.email")}</span>
                             </li>
                             <li className="flex items-start">
                                 <svg className="w-5 h-5 text-primary mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                 </svg>
-                                <span className="text-gray-400">+212 522 123 456</span>
+                                <span className="text-gray-400">{t("footer.phone")}</span>
                             </li>
                         </ul>
                     </div>
@@ -129,17 +132,17 @@ const Footer: React.FC = () => {
 
                 <div className="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
                     <p className="text-gray-400 text-sm">
-                        &copy; {new Date().getFullYear()} Hrayfi. Tous droits réservés.
+                        &copy; {new Date().getFullYear()} Hrayfi. {t("footer.rights")}
                     </p>
                     <div className="flex space-x-4 mt-4 md:mt-0">
                         <Link to="/terms" className="text-gray-400 hover:text-primary text-sm transition-colors">
-                            Conditions d'utilisation
+                            {t("footer.terms")}
                         </Link>
                         <Link to="/privacy" className="text-gray-400 hover:text-primary text-sm transition-colors">
-                            Politique de confidentialité
+                            {t("footer.privacy")}
                         </Link>
                         <Link to="/faq" className="text-gray-400 hover:text-primary text-sm transition-colors">
-                            FAQ
+                            {t("footer.faq")}
                         </Link>
                     </div>
                 </div>

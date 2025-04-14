@@ -1,9 +1,10 @@
-"use client"
-
 import type React from "react"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 const HeroSection: React.FC = () => {
+    const { t } = useLanguage();
+
     return (
         <div className="relative bg-gradient-to-r from-[#4a2511] to-[#DAAB3A] min-h-screen flex items-center">
             <div className="absolute inset-0 overflow-hidden">
@@ -24,7 +25,7 @@ const HeroSection: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
                         >
-                            Trouvez les meilleurs artisans au Maroc
+                            {t("hero.title")}
                         </motion.h1>
                         <motion.p
                             className="text-lg md:text-xl mb-8 text-gray-100"
@@ -32,8 +33,7 @@ const HeroSection: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
                         >
-                            Hrayfi connecte les clients avec des prestataires de services qualifiés pour tous vos besoins de
-                            bricolage, projets et conseils.
+                            {t("hero.subtitle")}
                         </motion.p>
 
                         <motion.div
@@ -47,14 +47,14 @@ const HeroSection: React.FC = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Trouver un service
+                                {t("hero.button.find")}
                             </motion.button>
                             <motion.button
                                 className="border-2 border-white text-white font-semibold px-6 py-3 rounded-md"
                                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Devenir prestataire
+                                {t("hero.button.become")}
                             </motion.button>
                         </motion.div>
 
@@ -93,7 +93,7 @@ const HeroSection: React.FC = () => {
                                         <span key={i}>★</span>
                                     ))}
                                 </div>
-                                <p className="text-white text-sm">Plus de 2000 prestataires de confiance</p>
+                                <p className="text-white text-sm">{t("hero.providers")}</p>
                             </div>
                         </motion.div>
                     </motion.div>

@@ -82,6 +82,10 @@ const translations: Record<Language, Record<string, string>> = {
         "auth.loading": "Chargement...",
 
         // Categories
+        "services.categories.title":"Explorez nos catégories",
+        "services.categories.subtitle":"Découvrez une large gamme de services proposés par nos artisans qualifiés dans différentes catégories",
+        "services.categories.viewAll":"voir tous les catégories",
+        "services.count":"services",
         "category.plumbing": "Plomberie",
         "category.electrical": "Électricité",
         "category.painting": "Peinture",
@@ -103,6 +107,11 @@ const translations: Record<Language, Record<string, string>> = {
         "howItWorks.step4.title": "Profitez du service",
         "howItWorks.step4.description": "Recevez un service de qualité et laissez votre avis pour aider la communauté.",
         "howItWorks.button": "Commencer maintenant",
+
+
+        // services
+
+
 
         // Testimonials
         "testimonials.title": "Ce que disent nos clients",
@@ -189,6 +198,9 @@ const translations: Record<Language, Record<string, string>> = {
         "artisans.experience": "الخبرة",
         "artisans.services": "الخدمات",
         "artisans.completed": "المنجزة",
+        "artisans.filter.rating":"التقييم",
+        "artisans.no.results":"لا يوجد",
+
 
         // Authentication
         "auth.login": "تسجيل الدخول",

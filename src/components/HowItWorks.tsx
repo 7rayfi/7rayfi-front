@@ -1,37 +1,37 @@
-"use client"
-
 import type React from "react"
 import { motion } from "framer-motion"
-
-const steps = [
-    {
-        id: 1,
-        title: "Recherchez un service",
-        description:
-            "Parcourez notre large sélection de services ou utilisez la recherche pour trouver ce dont vous avez besoin.",
-        icon: "🔍",
-    },
-    {
-        id: 2,
-        title: "Choisissez un prestataire",
-        description: "Comparez les profils, les évaluations et les portfolios pour choisir le meilleur prestataire.",
-        icon: "👨‍🔧",
-    },
-    {
-        id: 3,
-        title: "Contactez et réservez",
-        description: "Discutez directement avec le prestataire et réservez le service à la date qui vous convient.",
-        icon: "📅",
-    },
-    {
-        id: 4,
-        title: "Profitez du service",
-        description: "Recevez un service de qualité et laissez votre avis pour aider la communauté.",
-        icon: "⭐",
-    },
-]
+import { useLanguage } from "../context/LanguageContext"
 
 const HowItWorks: React.FC = () => {
+    const { t } = useLanguage();
+
+    const steps = [
+        {
+            id: 1,
+            titleKey: "howItWorks.step1.title",
+            descriptionKey: "howItWorks.step1.description",
+            icon: "🔍",
+        },
+        {
+            id: 2,
+            titleKey: "howItWorks.step2.title",
+            descriptionKey: "howItWorks.step2.description",
+            icon: "👨‍🔧",
+        },
+        {
+            id: 3,
+            titleKey: "howItWorks.step3.title",
+            descriptionKey: "howItWorks.step3.description",
+            icon: "📅",
+        },
+        {
+            id: 4,
+            titleKey: "howItWorks.step4.title",
+            descriptionKey: "howItWorks.step4.description",
+            icon: "⭐",
+        },
+    ]
+
     const container = {
         hidden: { opacity: 0 },
         show: {
@@ -58,7 +58,7 @@ const HowItWorks: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        Comment ça marche
+                        {t("howItWorks.title")}
                     </motion.h2>
                     <motion.p
                         className="text-gray-600 max-w-2xl mx-auto"
@@ -67,7 +67,7 @@ const HowItWorks: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        Suivez ces étapes simples pour trouver et réserver le service dont vous avez besoin
+                        {t("howItWorks.subtitle")}
                     </motion.p>
                 </div>
 
@@ -90,8 +90,8 @@ const HowItWorks: React.FC = () => {
                                     </div>
                                 )}
                             </div>
-                            <h3 className="text-xl font-semibold text-gray-800 mb-3">{step.title}</h3>
-                            <p className="text-gray-600">{step.description}</p>
+                            <h3 className="text-xl font-semibold text-gray-800 mb-3">{t(step.titleKey)}</h3>
+                            <p className="text-gray-600">{t(step.descriptionKey)}</p>
                         </motion.div>
                     ))}
                 </motion.div>
@@ -102,7 +102,7 @@ const HowItWorks: React.FC = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        Commencer maintenant
+                        {t("howItWorks.button")}
                     </motion.button>
                 </div>
             </div>

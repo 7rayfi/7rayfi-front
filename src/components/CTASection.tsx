@@ -1,11 +1,14 @@
-"use client"
-
 import type React from "react"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 const CTASection: React.FC = () => {
+    const { t } = useLanguage();
+
     return (
-        <section className="py-16 bg-gradient-to-r from-secondary to-primary text-white">
+        <section className="py-16 bg-gradient-to-r from-secondary to-primary text-white"   style={{
+            background: `linear-gradient(to right, var(--secondary), var(--primary), var(--accent))`
+        }}>
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.h2
@@ -15,7 +18,7 @@ const CTASection: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        Prêt à trouver le service parfait pour vos besoins ?
+                        {t("cta.title")}
                     </motion.h2>
                     <motion.p
                         className="text-xl text-gray-100 mb-8"
@@ -24,7 +27,7 @@ const CTASection: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        Rejoignez des milliers d'utilisateurs satisfaits et commencez à utiliser Hrayfi dès aujourd'hui.
+                        {t("cta.subtitle")}
                     </motion.p>
                     <motion.div
                         className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -38,14 +41,14 @@ const CTASection: React.FC = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Trouver un service
+                            {t("cta.button.find")}
                         </motion.button>
                         <motion.button
                             className="border-2 border-white text-white font-semibold px-8 py-4 rounded-md"
                             whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Devenir prestataire
+                            {t("cta.button.become")}
                         </motion.button>
                     </motion.div>
                 </div>

@@ -1,9 +1,8 @@
-"use client"
-
 import type React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext"
 
 interface RegisterFormProps {
     onSubmit?: (data: {
@@ -16,6 +15,7 @@ interface RegisterFormProps {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
+    const { t } = useLanguage();
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
@@ -29,11 +29,11 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
     const validatePassword = () => {
         if (password !== confirmPassword) {
-            setPasswordError("Les mots de passe ne correspondent pas")
+            setPasswordError(t("auth.password.mismatch"))
             return false
         }
         if (password.length < 8) {
-            setPasswordError("Le mot de passe doit contenir au moins 8 caractères")
+            setPasswordError(t("auth.password.tooShort"))
             return false
         }
         setPasswordError(null)
@@ -49,7 +49,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
         }
 
         if (!agreeTerms) {
-            setError("Vous devez accepter les conditions d'utilisation")
+            setError(t("auth.terms.required"))
             return
         }
 
@@ -67,7 +67,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
             // For now, we'll just simulate a successful registration
             console.log("Registration successful")
         } catch (err) {
-            setError("Une erreur est survenue. Veuillez réessayer.")
+            setError(t("auth.error"))
             console.error("Registration error:", err)
         } finally {
             setIsLoading(false)
@@ -82,7 +82,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
             transition={{ duration: 0.5 }}
         >
             <div className="bg-gradient-to-r from-primary to-secondary py-6 px-6">
-                <h2 className="text-2xl font-bold text-white text-center">Inscription</h2>
+                <h2 className="text-2xl font-bold text-white text-center">{t("auth.register")}</h2>
             </div>
 
             <div className="p-6">
@@ -92,7 +92,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                     <div className="flex gap-4 mb-4">
                         <div className="w-1/2">
                             <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">
-                                Prénom
+                                {t("auth.firstName")}
                             </label>
                             <input
                                 type="text"
@@ -100,13 +100,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                                placeholder="Prénom"
+                                placeholder={t("auth.firstName")}
                                 required
                             />
                         </div>
                         <div className="w-1/2">
                             <label htmlFor="lastName" className="block text-gray-700 font-medium mb-2">
-                                Nom
+                                {t("auth.lastName")}
                             </label>
                             <input
                                 type="text"
@@ -114,7 +114,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                                placeholder="Nom"
+                                placeholder={t("auth.lastName")}
                                 required
                             />
                         </div>
@@ -122,7 +122,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                            Email
+                            {t("auth.email")}
                         </label>
                         <input
                             type="email"
@@ -137,7 +137,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
                     <div className="mb-4">
                         <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
-                            Mot de passe
+                            {t("auth.password")}
                         </label>
                         <input
                             type="password"
@@ -152,7 +152,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
                     <div className="mb-4">
                         <label htmlFor="confirmPassword" className="block text-gray-700 font-medium mb-2">
-                            Confirmer le mot de passe
+                            {t("auth.confirmPassword")}
                         </label>
                         <input
                             type="password"
@@ -169,7 +169,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                     </div>
 
                     <div className="mb-6">
-                        <label className="block text-gray-700 font-medium mb-2">Type de compte</label>
+                        <label className="block text-gray-700 font-medium mb-2">{t("auth.accountType")}</label>
                         <div className="flex gap-4">
                             <div className="flex-1">
                                 <input
@@ -189,7 +189,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                             : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                                     }`}
                                 >
-                                    Client
+                                    {t("auth.client")}
                                 </label>
                             </div>
                             <div className="flex-1">
@@ -210,7 +210,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                             : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                                     }`}
                                 >
-                                    Prestataire (Hrayfi)
+                                    {t("auth.provider")}
                                 </label>
                             </div>
                         </div>
@@ -226,13 +226,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                                 className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded mt-1"
                             />
                             <label htmlFor="agree-terms" className="ml-2 block text-sm text-gray-700">
-                                J'accepte les{" "}
+                                {t("auth.terms")}{" "}
                                 <Link to="/terms" className="text-primary hover:underline">
-                                    conditions d'utilisation
+                                    {t("footer.terms")}
                                 </Link>{" "}
-                                et la{" "}
+                                {t("auth.privacy")}{" "}
                                 <Link to="/privacy" className="text-primary hover:underline">
-                                    politique de confidentialité
+                                    {t("footer.privacy")}
                                 </Link>
                             </label>
                         </div>
@@ -247,23 +247,23 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                     >
                         {isLoading ? (
                             <span className="flex items-center justify-center">
-                <svg
-                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                >
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Inscription en cours...
-              </span>
+                                <svg
+                                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path
+                                        className="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    ></path>
+                                </svg>
+                                {t("auth.loading")}
+                            </span>
                         ) : (
-                            "S'inscrire"
+                            t("auth.signUp")
                         )}
                     </motion.button>
                 </form>
@@ -274,7 +274,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                             <div className="w-full border-t border-gray-300"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-gray-500">Ou s'inscrire avec</span>
+                            <span className="px-2 bg-white text-gray-500">{t("auth.or")}</span>
                         </div>
                     </div>
 
@@ -310,9 +310,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600">
-                        Vous avez déjà un compte ?{" "}
+                        {t("auth.haveAccount")}{" "}
                         <Link to="/login" className="text-primary font-medium hover:underline">
-                            Se connecter
+                            {t("auth.signIn")}
                         </Link>
                     </p>
                 </div>
