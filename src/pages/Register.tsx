@@ -24,7 +24,6 @@ const Register: React.FC = () => {
         // Here you would normally handle the registration logic with your API
         console.log("Registration data:", data)
 
-        // For demo purposes, we'll just redirect to the login page
         setTimeout(() => {
             navigate("/login")
         }, 1000)
