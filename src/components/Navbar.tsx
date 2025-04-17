@@ -122,7 +122,7 @@ const Navbar = () => {
 
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className={`${isScrolled ? 'text-gray-800' : 'text-white'} focus:outline-none`}
+                        className={`${isScrolled ? 'text-gray-800' : 'text-gray-800'} focus:outline-none`}
                     >
                         <svg
                             className="w-6 h-6"
