@@ -1,9 +1,11 @@
+
 import type React from "react"
 import { useState, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import ServiceCard from "../components/ServiceCard"
 import { useLanguage } from "../context/LanguageContext"
+
 
 // Sample data for services
 const servicesData = [
@@ -20,6 +22,7 @@ const servicesData = [
         categoryKey: "category.plumbing",
         tags: ["urgence", "réparation", "installation"],
         tagKeys: ["tag.emergency", "tag.repair", "tag.installation"],
+
         provider: {
             id: 101,
             name: "Ahmed M.",
@@ -39,6 +42,7 @@ const servicesData = [
         categoryKey: "category.electrical",
         tags: ["installation", "réparation", "commercial"],
         tagKeys: ["tag.installation", "tag.repair", "tag.commercial"],
+
         provider: {
             id: 102,
             name: "Karim B.",
@@ -58,6 +62,7 @@ const servicesData = [
         categoryKey: "category.painting",
         tags: ["intérieur", "décoration", "résidentiel"],
         tagKeys: ["tag.interior", "tag.decoration", "tag.residential"],
+
         provider: {
             id: 103,
             name: "Yasmine L.",
@@ -77,6 +82,7 @@ const servicesData = [
         categoryKey: "category.carpentry",
         tags: ["sur mesure", "bois", "meubles"],
         tagKeys: ["tag.custom", "tag.wood", "tag.furniture"],
+
         provider: {
             id: 104,
             name: "Omar H.",
@@ -96,6 +102,7 @@ const servicesData = [
         categoryKey: "category.cleaning",
         tags: ["professionnel", "résidentiel", "complet"],
         tagKeys: ["tag.professional", "tag.residential", "tag.complete"],
+
         provider: {
             id: 105,
             name: "Fatima Z.",
@@ -115,6 +122,7 @@ const servicesData = [
         categoryKey: "category.gardening",
         tags: ["entretien", "création", "paysagisme"],
         tagKeys: ["tag.maintenance", "tag.creation", "tag.landscaping"],
+
         provider: {
             id: 106,
             name: "Youssef T.",
@@ -125,6 +133,7 @@ const servicesData = [
 
 const Services: React.FC = () => {
     const { t, language } = useLanguage();
+
     const [services, setServices] = useState(servicesData)
     const [filters, setFilters] = useState({
         category: "",
@@ -192,6 +201,7 @@ const Services: React.FC = () => {
 
         setServices(filteredServices)
     }, [filters, language])
+
 
     const handleCategoryChange = (category: string) => {
         setFilters((prev) => ({ ...prev, category }))
@@ -268,6 +278,7 @@ const Services: React.FC = () => {
         return t(tagKeyMap[tag] || tag);
     };
 
+
     return (
         <div className={isRTL ? "rtl" : ""}>
             <Navbar />
@@ -276,6 +287,7 @@ const Services: React.FC = () => {
                     <div className="mb-8">
                         <h1 className="text-3xl font-bold text-gray-800 mb-2">{t("services.title")}</h1>
                         <p className="text-gray-600">{t("services.subtitle")}</p>
+
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-6">
@@ -283,11 +295,13 @@ const Services: React.FC = () => {
                         <div className="hidden md:block w-64 bg-white rounded-lg shadow-md p-4 h-fit">
                             <h2 className="text-lg font-semibold mb-4 text-primary">{t("services.filter.title")}</h2>
 
+
                             {/* Search */}
                             <div className="mb-4">
                                 <input
                                     type="text"
                                     placeholder={t("services.search")}
+
                                     className="w-full px-3 py-2 border rounded-md"
                                     value={filters.searchTerm}
                                     onChange={handleSearchChange}
@@ -297,6 +311,7 @@ const Services: React.FC = () => {
                             {/* Category Filter */}
                             <div className="mb-4">
                                 <h3 className="font-medium mb-2">{t("services.filter.category")}</h3>
+
                                 <select
                                     className="w-full px-3 py-2 border rounded-md"
                                     value={filters.category}
@@ -306,6 +321,7 @@ const Services: React.FC = () => {
                                     {categories.map((category) => (
                                         <option key={category} value={category}>
                                             {getCategoryTranslation(category)}
+
                                         </option>
                                     ))}
                                 </select>
@@ -314,6 +330,7 @@ const Services: React.FC = () => {
                             {/* Price Range Filter */}
                             <div className="mb-4">
                                 <h3 className="font-medium mb-2">{t("services.filter.price")}</h3>
+
                                 <div className="flex items-center gap-2">
                                     <input
                                         type="number"
@@ -336,6 +353,7 @@ const Services: React.FC = () => {
                             {/* Rating Filter */}
                             <div className="mb-4">
                                 <h3 className="font-medium mb-2">{t("services.filter.rating")}</h3>
+
                                 <div className="flex items-center gap-1">
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <button
@@ -349,6 +367,7 @@ const Services: React.FC = () => {
                                     {filters.rating > 0 && (
                                         <button className="ml-2 text-xs text-gray-500" onClick={() => handleRatingChange(0)}>
                                             ({t("services.filter.reset")})
+
                                         </button>
                                     )}
                                 </div>
@@ -357,6 +376,7 @@ const Services: React.FC = () => {
                             {/* Tags Filter */}
                             <div className="mb-4">
                                 <h3 className="font-medium mb-2">{t("services.filter.tags")}</h3>
+
                                 <div className="flex flex-wrap gap-2">
                                     {tags.map((tag) => (
                                         <button
@@ -369,6 +389,7 @@ const Services: React.FC = () => {
                                             onClick={() => handleTagToggle(tag)}
                                         >
                                             {getTagTranslation(tag)}
+
                                         </button>
                                     ))}
                                 </div>
@@ -377,12 +398,14 @@ const Services: React.FC = () => {
                             {/* Provider Filter */}
                             <div className="mb-4">
                                 <h3 className="font-medium mb-2">{t("services.filter.provider")}</h3>
+
                                 <select
                                     className="w-full px-3 py-2 border rounded-md"
                                     value={filters.provider}
                                     onChange={(e) => handleProviderChange(e.target.value)}
                                 >
                                     <option value="">{t("all")}</option>
+
                                     {providers.map((provider) => (
                                         <option key={provider} value={provider}>
                                             {provider}
@@ -397,6 +420,7 @@ const Services: React.FC = () => {
                                 onClick={resetFilters}
                             >
                                 {t("services.filter.reset")}
+
                             </button>
                         </div>
 
@@ -407,6 +431,7 @@ const Services: React.FC = () => {
                                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                             >
                                 <span className="font-medium">{t("services.filter.title")}</span>
+
                                 <svg
                                     className={`w-5 h-5 transition-transform ${isFilterOpen ? "transform rotate-180" : ""}`}
                                     fill="none"
@@ -425,6 +450,7 @@ const Services: React.FC = () => {
                                         <input
                                             type="text"
                                             placeholder={t("services.search")}
+
                                             className="w-full px-3 py-2 border rounded-md"
                                             value={filters.searchTerm}
                                             onChange={handleSearchChange}
@@ -434,6 +460,7 @@ const Services: React.FC = () => {
                                     {/* Category Filter */}
                                     <div className="mb-4">
                                         <h3 className="font-medium mb-2">{t("services.filter.category")}</h3>
+
                                         <select
                                             className="w-full px-3 py-2 border rounded-md"
                                             value={filters.category}
@@ -443,6 +470,7 @@ const Services: React.FC = () => {
                                             {categories.map((category) => (
                                                 <option key={category} value={category}>
                                                     {getCategoryTranslation(category)}
+
                                                 </option>
                                             ))}
                                         </select>
@@ -451,6 +479,7 @@ const Services: React.FC = () => {
                                     {/* Price Range Filter */}
                                     <div className="mb-4">
                                         <h3 className="font-medium mb-2">{t("services.filter.price")}</h3>
+
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="number"
@@ -476,6 +505,7 @@ const Services: React.FC = () => {
                                         onClick={resetFilters}
                                     >
                                         {t("services.filter.reset")}
+
                                     </button>
                                 </div>
                             )}
@@ -488,6 +518,7 @@ const Services: React.FC = () => {
                                     <p className="text-lg text-gray-600">{t("services.no.results")}</p>
                                     <button className="mt-4 bg-primary text-white px-4 py-2 rounded-md" onClick={resetFilters}>
                                         {t("services.filter.reset")}
+
                                     </button>
                                 </div>
                             ) : (
@@ -502,6 +533,7 @@ const Services: React.FC = () => {
                                         };
                                         return <ServiceCard key={service.id} {...translatedService} />;
                                     })}
+
                                 </div>
                             )}
                         </div>
@@ -514,3 +546,4 @@ const Services: React.FC = () => {
 }
 
 export default Services
+

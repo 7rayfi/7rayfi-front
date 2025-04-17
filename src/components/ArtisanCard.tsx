@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 
+
 interface ArtisanCardProps {
     id: number
     name: string
@@ -25,7 +26,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                                                      image,
                                                      services,
                                                      completedJobs,
-                                                 }) => {
+                                                 }) 
     const { t } = useLanguage();
 
     // Convertir la spécialité en clé de traduction
@@ -44,6 +45,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
         return specialtyMap[specialty] || specialty;
     };
 
+
     return (
         <motion.div
             className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow"
@@ -61,8 +63,9 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                     />
                     <div className="flex-1 text-center sm:text-left">
                         <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
+
                         <p className="text-primary font-medium">{t(getSpecialtyKey(specialty)) || specialty}</p>
-                        <div className="flex items-center justify-center sm:justify-start mt-2">
+ <div className="flex items-center justify-center sm:justify-start mt-2">
                             <span className="text-accent mr-1">★</span>
                             <span className="text-sm text-gray-700">{rating.toFixed(1)}</span>
                             <span className="mx-2 text-gray-400">•</span>
@@ -70,6 +73,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                         </div>
                         <div className="mt-3 grid grid-cols-3 gap-2 text-center">
                             <div className="bg-light rounded-md p-2">
+
                                 <p className="text-xs text-gray-600">{t("artisans.experience")}</p>
                                 <p className="font-semibold text-primary">{experience} {t("years")}</p>
                             </div>
@@ -79,6 +83,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                             </div>
                             <div className="bg-light rounded-md p-2">
                                 <p className="text-xs text-gray-600">{t("artisans.completed")}</p>
+
                                 <p className="font-semibold text-primary">{completedJobs}</p>
                             </div>
                         </div>
@@ -91,7 +96,9 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                         >
+
                             {t("artisans.profile")}
+
                         </motion.button>
                     </Link>
                     <Link to={`/contact/${id}`} className="flex-1">
@@ -100,7 +107,9 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                         >
+
                             {t("artisans.contact")}
+
                         </motion.button>
                     </Link>
                 </div>

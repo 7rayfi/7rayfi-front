@@ -86,6 +86,7 @@ const translations: Record<Language, Record<string, string>> = {
         "services.categories.subtitle":"Découvrez une large gamme de services proposés par nos artisans qualifiés dans différentes catégories",
         "services.categories.viewAll":"voir tous les catégories",
         "services.count":"services",
+
         "category.plumbing": "Plomberie",
         "category.electrical": "Électricité",
         "category.painting": "Peinture",
@@ -109,7 +110,9 @@ const translations: Record<Language, Record<string, string>> = {
         "howItWorks.button": "Commencer maintenant",
 
 
+
         // services
+
 
 
 
@@ -200,6 +203,7 @@ const translations: Record<Language, Record<string, string>> = {
         "artisans.completed": "المنجزة",
         "artisans.filter.rating":"التقييم",
         "artisans.no.results":"لا يوجد",
+
 
 
         // Authentication

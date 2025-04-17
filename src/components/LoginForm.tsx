@@ -7,6 +7,7 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { AtSign, Lock, Facebook, Mail, Eye, EyeOff, Phone } from "lucide-react"
 
+
 interface LoginFormProps {
     onSubmit?: (data: { identifier: string; password: string }) => void
 }
@@ -14,6 +15,7 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     const { t } = useLanguage()
     const [identifier, setIdentifier] = useState("")
+
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -75,6 +77,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     return (
         <motion.div
             className="w-full mx-auto bg-white rounded-xl shadow-lg overflow-hidden"
+
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -234,6 +237,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                         </div>
                     </motion.div>
 
+
                     <motion.div className="flex items-center justify-between mb-6" variants={itemVariants}>
                         <div className="flex items-center">
                             <input
@@ -255,6 +259,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                                 style={{ color: "#93441a" }}
                             >
                                 {t("auth.forgotPassword") || "Mot de passe oublié?"}
+
                             </Link>
                         </div>
                     </motion.div>
@@ -299,6 +304,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                     </motion.div>
                 </motion.form>
 
+
                 <motion.div className="mt-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
@@ -306,6 +312,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                         </div>
                         <div className="relative flex justify-center text-sm">
                             <span className="px-4 bg-white text-gray-500">{t("auth.or") || "ou"}</span>
+
                         </div>
                     </div>
 
@@ -341,6 +348,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                         {t("auth.noAccount") || "Vous n'avez pas de compte?"}{" "}
                         <Link to="/register" className="font-medium hover:underline" style={{ color: "#93441a" }}>
                             {t("auth.signUp") || "S'inscrire"}
+
                         </Link>
                     </p>
                 </motion.div>

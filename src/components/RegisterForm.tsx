@@ -7,6 +7,7 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { AtSign, Lock, User, Facebook, Mail, Eye, EyeOff, UserCheck, UserCog, Phone } from "lucide-react"
 
+
 interface RegisterFormProps {
     onSubmit?: (data: {
         firstName: string
@@ -20,6 +21,7 @@ interface RegisterFormProps {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
     const { t } = useLanguage()
+
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
@@ -147,6 +149,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
     return (
         <motion.div
             className="w-full mx-auto bg-white rounded-xl shadow-lg overflow-hidden"
+
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -383,6 +386,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                             <motion.div className="mb-6" variants={itemVariants}>
                                 <label htmlFor="confirmPassword" className="block text-gray-700 font-medium mb-2">
                                     {t("auth.confirmPassword") || "Confirmer le mot de passe"} *
+
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -606,6 +610,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                             </motion.div>
                         </motion.div>
                     )}
+
                 </form>
 
                 <motion.div className="mt-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
@@ -615,6 +620,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                         </div>
                         <div className="relative flex justify-center text-sm">
                             <span className="px-4 bg-white text-gray-500">{t("auth.or") || "ou"}</span>
+
                         </div>
                     </div>
 
@@ -650,6 +656,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                         {t("auth.haveAccount") || "Vous avez déjà un compte?"}{" "}
                         <Link to="/login" className="font-medium hover:underline" style={{ color: "#93441a" }}>
                             {t("auth.signIn") || "Se connecter"}
+
                         </Link>
                     </p>
                 </motion.div>

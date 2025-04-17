@@ -1,3 +1,4 @@
+
 import type React from "react"
 import { useState, useEffect } from "react"
 import Navbar from "../components/Navbar"
@@ -400,3 +401,4 @@ const Artisans: React.FC = () => {
 }
 
 export default Artisans
+

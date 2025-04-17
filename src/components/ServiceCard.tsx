@@ -28,6 +28,7 @@ const defaultServiceImages = [
 const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, price, image, category, provider }) => {
     const { t } = useLanguage();
 
+
     // Utiliser l'image fournie ou une image par défaut basée sur l'ID
     const imageUrl = image || defaultServiceImages[id % defaultServiceImages.length]
 
@@ -43,22 +44,23 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, price
                 <img src={imageUrl || "/placeholder.svg"} alt={title} className="w-full h-48 object-cover" />
                 <div className="absolute top-2 right-2 bg-[#d62828] text-white text-xs font-bold px-2 py-1 rounded">
                     {t(`${category}`)}
+
                 </div>
             </div>
             <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2 text-gray-800">{title}</h3>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-2">{description}</p>
                 <div className="flex items-center mb-3">
-                    <span className="text-yellow-500 mr-1">★</span>
+                    <span className="text-accent mr-1">★</span>
                     <span className="text-sm text-gray-700">{provider.rating.toFixed(1)}</span>
                     <span className="mx-2 text-gray-400">•</span>
                     <span className="text-sm text-gray-700">{provider.name}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                    <span className="font-bold text-[#d62828]">{price} DH</span>
+                    <span className="font-bold text-primary">{price} DH</span>
                     <Link to={`/services/${id}`}>
                         <motion.button
-                            className="bg-[#f77f00] text-white px-3 py-1 rounded text-sm"
+                            className="bg-secondary text-white px-3 py-1 rounded text-sm"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
