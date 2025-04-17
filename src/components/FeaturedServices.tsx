@@ -11,7 +11,8 @@ const featuredServices = [
         titleKey: "services.plumbing.repair",
         description: "Service de réparation de plomberie rapide et professionnel pour tous vos problèmes d'eau.",
         descriptionKey: "services.plumbing.repair.description",
-        price: 250,
+        price: 2500,
+
         image:
             "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
         category: "Plomberie",
