@@ -7,6 +7,8 @@ import Artisans from "./pages/Artisans.tsx";
 import {LanguageProvider} from "./context/LanguageContext.tsx";
 import CreateService from "./pages/CreateService.tsx";
 import RequestService from "./pages/RequestService.tsx";
+import ArtisanProfile from "./pages/ArtisanProfile.tsx";
+import ArtisanPortfolio from "./pages/ArtisanPortfolio.tsx";
 
 function App() {
     return (
@@ -20,6 +22,9 @@ function App() {
                     <Route path="/artisans" element={<Artisans />} />
                     <Route path="/create-service" element={<CreateService />} />
                     <Route path="/request-service" element={<RequestService />} />
+                    <Route path="/profile" element={<ArtisanProfile />} />
+                    <Route path="/portfolio" element={<ArtisanPortfolio />} />
+
                 </Routes>
             </Router>
         </LanguageProvider>
