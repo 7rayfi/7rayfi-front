@@ -5,6 +5,8 @@ import Register from "./pages/Register.tsx";
 import Services from "./pages/Services.tsx";
 import Artisans from "./pages/Artisans.tsx";
 import {LanguageProvider} from "./context/LanguageContext.tsx";
+import CreateService from "./pages/CreateService.tsx";
+import RequestService from "./pages/RequestService.tsx";
 
 function App() {
     return (
@@ -16,6 +18,8 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/artisans" element={<Artisans />} />
+                    <Route path="/create-service" element={<CreateService />} />
+                    <Route path="/request-service" element={<RequestService />} />
                 </Routes>
             </Router>
         </LanguageProvider>
