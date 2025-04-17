@@ -81,11 +81,7 @@ const HeroSection: React.FC = () => {
                                     alt="User 3"
                                     className="w-10 h-10 rounded-full border-2 border-white"
                                 />
-                                <img
-                                    src="https://randomuser.me/api/portraits/women/63.jpg"
-                                    alt="User 4"
-                                    className="w-10 h-10 rounded-full border-2 border-white"
-                                />
+
                             </div>
                             <div className="ml-4">
                                 <div className="text-yellow-300 flex">
