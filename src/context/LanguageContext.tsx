@@ -58,8 +58,14 @@ const translations: Record<Language, Record<string, string>> = {
         "artisans.experience": "Expérience",
         "artisans.services": "Services",
         "artisans.completed": "Réalisés",
+        "artisans.search":"chercher ...",
+
 
         // Authentication
+        "auth.welcomeBack":"bienvenue",
+        "auth.phoneFormat":"numéro de votre télépone",
+
+        "auth.phone" : "Téléphone",
         "auth.login": "Connexion",
         "auth.register": "Inscription",
         "auth.email": "Email",
@@ -171,6 +177,7 @@ const translations: Record<Language, Record<string, string>> = {
 
         // Services
         "services.title": "الخدمات الشائعة",
+        "services.categories.subtitle":"اكتشف مجموعة واسعة من الخدمات التي يقدمها الحرفيون المؤهلون لدينا في فئات مختلفة",
         "services.subtitle": "اكتشف الخدمات الأكثر طلبًا من قبل عملائنا",
         "services.button": "عرض جميع الخدمات",
         "services.filter.title": "تصفية الخدمات",
@@ -181,6 +188,10 @@ const translations: Record<Language, Record<string, string>> = {
         "services.filter.apply": "تطبيق",
         "services.filter.reset": "إعادة تعيين",
         "services.details": "عرض التفاصيل",
+        "services.count":"عدد الخدمات",
+        "services.categories.viewAll":"المزيد",
+        "services.search":"ابحث",
+
         "all": "الكل",
         "years": "سنوات",
 
@@ -200,9 +211,13 @@ const translations: Record<Language, Record<string, string>> = {
         "artisans.completed": "المنجزة",
         "artisans.filter.rating":"التقييم",
         "artisans.no.results":"لا يوجد",
+        "artisans.search":"ابحث",
 
 
         // Authentication
+        "auth.welcomeBack":"مرحبا بك",
+        "auth.phoneFormat":"الهاتف المغربي",
+        "auth.phone" : "الهاتق",
         "auth.login": "تسجيل الدخول",
         "auth.register": "التسجيل",
         "auth.email": "البريد الإلكتروني",
@@ -225,6 +240,7 @@ const translations: Record<Language, Record<string, string>> = {
         "auth.loading": "جاري التحميل...",
 
         // Categories
+        "services.categories.title": "الفئات",
         "category.plumbing": "السباكة",
         "category.electrical": "الكهرباء",
         "category.painting": "الدهان",
